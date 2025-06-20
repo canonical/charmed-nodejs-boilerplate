@@ -1,0 +1,71 @@
+# created by charmcraft init --profile go-framework --name expressapp
+# later manually modified to fit nodejs needs
+name: nodecharm
+type: charm
+base: ubuntu@24.04
+platforms:
+  amd64:
+    build-on: [amd64]
+    build-for: [amd64]
+
+summary: NodeJS Barebones Application
+description: |
+  NodeJS Barebones Application
+
+extensions:
+  - go-framework
+
+# requires:
+#   nginx-route:
+#     interface: nginx-route
+#     limit: 1
+
+config:
+  options:
+    HOST:
+      type: string
+      default: localhost
+      description: The host the service listens on.
+    APP_ENV:
+      type: string
+      default: production
+      description: "The environment the service is running in. enum: development, production"
+    CUSTOM_BASE_URL:
+      type: string
+      default: "http://localhost:8080"
+    MYENVVARIABLE:
+      type: string
+      # required: True
+
+# Uncomment the integrations used by your application
+# Integrations set to "optional: false" will block the charm
+# until the applications are integrated.
+# requires:
+#   mysql:
+#     interface: mysql_client
+#     optional: false
+#     limit: 1
+#   postgresql:
+#     interface: postgresql_client
+#     optional: false
+#     limit: 1
+#   mongodb:
+#     interface: mongodb_client
+#     optional: false
+#     limit: 1
+#   redis:
+#     interface: redis
+#     optional: false
+#     limit: 1
+#   s3:
+#     interface: s3
+#     optional: false
+#     limit: 1
+#   saml:
+#     interface: saml
+#     optional: false
+#     limit: 1
+#   rabbitmq:
+#     interface: rabbitmq
+#     optional: false
+#     limit: 1

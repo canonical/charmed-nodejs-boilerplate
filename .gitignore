@@ -69,3 +69,17 @@ temp/
 package-lock.json
 yarn.lock
 pnpm-lock.yaml
+
+# no rocks or charms
+*.rock
+*.charm
+
+venv/
+build/
+*.charm
+.tox/
+.coverage
+__pycache__/
+*.py[cod]
+.idea
+.vscode/

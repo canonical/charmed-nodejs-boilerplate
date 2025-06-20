@@ -1,0 +1,52 @@
+name: noderock
+base: ubuntu@24.04                                        # as an alternative, a ubuntu base can be used
+version: '0.18'                                           # just for humans. Semantic versioning is recommended
+summary: Barebones NodeJS rock                            # 79 char long summary
+description: |
+    Barebones NodeJS rock
+
+platforms:
+  amd64:
+
+services:
+  go:
+    override: replace
+    command: npm start
+    startup: enabled
+    # on-success: start
+    on-failure: shutdown
+    working-dir: /app/src
+
+parts:
+  app:
+    plugin: nil
+    source: .
+    source-type: local
+    build-snaps:
+      - node/22/stable
+    override-build: |
+      echo "We are here"
+      ls -lh
+      pwd
+      echo "We are here2"
+      echo ${CRAFT_PART_INSTALL}
+      echo "The value of CRAFT_PART_INSTALL is: ${CRAFT_PART_INSTALL}"
+      rm -rf node_modules
+      rm -rf charm
+      cd src
+      npm install
+      cd ..
+      mkdir -p ${CRAFT_PART_INSTALL}/app
+      cp -ar * ${CRAFT_PART_INSTALL}/app
+  
+  install-dependencies:
+    plugin: npm
+    npm-include-node: true
+    npm-node-version: "22"
+    source: ./src
+    source-type: local
+    overlay-packages:
+        - ca-certificates
+        - coreutils
+        - bash
+        - htop
