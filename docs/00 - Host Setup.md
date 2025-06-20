@@ -6,6 +6,8 @@ LXD is required for building a rock. Below are the steps to get it running:
 ```
 sudo snap install lxd
 sudo lxd init --auto
+getent group lxd | grep -qwF "$USER" || sudo usermod -aG lxd "$USER"
+newgrp lxd
 ```
 
 ## Docker Installation (try to avoid)
