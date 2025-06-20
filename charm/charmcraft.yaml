@@ -1,15 +1,12 @@
 # created by charmcraft init --profile go-framework --name expressapp
 # later manually modified to fit nodejs needs
-name: nodecharm
+name: barecharm
 type: charm
 base: ubuntu@24.04
 platforms:
   amd64:
     build-on: [amd64]
     build-for: [amd64]
-  arm64:
-    build-on: [arm64]
-    build-for: [arm64]
 
 summary: NodeJS Barebones Application
 description: |
