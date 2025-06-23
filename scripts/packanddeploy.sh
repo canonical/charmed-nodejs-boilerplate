@@ -34,6 +34,10 @@ echo "== Packing Charm ==========================================="
 echo "============================================================"
 cd charm
 charmcraft clean
+charmcraft fetch-lib
+charmcraft fetch-lib charms.tempo_coordinator_k8s.v0.tracing
+charmcraft fetch-lib charms.smtp_integrator.v0.smtp
+charmcraft fetch-lib charms.openfga_k8s.v1.openfga
 charmcraft pack
 cd ..
 
@@ -42,4 +46,5 @@ echo
 echo "============================================================"
 echo "== Refreshing Application =================================="
 echo "============================================================"
+# juju deploy ./charm/${charmname}_amd64.charm exapp --resource app-image=localhost:32000/${rockname}:${version}
 juju refresh exapp --path ./charm/${charmname}_amd64.charm --resource app-image=localhost:32000/${rockname}:${version}

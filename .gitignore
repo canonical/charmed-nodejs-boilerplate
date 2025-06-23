@@ -20,12 +20,12 @@ public/build/ # If your build artifacts go into a 'build' folder inside 'public'
 .nuxt/        # Nuxt.js build output
 out/          # Common for static site generators or custom build outputs
 
-# TypeScript
-# Compiled JavaScript files (transpiled from .ts) and their source maps
-*.js
-*.js.map
-*.d.ts # Declaration files IF they are only generated and not source
-tsconfig.tsbuildinfo # Incremental build info
+# # TypeScript
+# # Compiled JavaScript files (transpiled from .ts) and their source maps
+# *.js
+# *.js.map
+# *.d.ts # Declaration files IF they are only generated and not source
+# tsconfig.tsbuildinfo # Incremental build info
 
 # Environment variables
 # These files contain sensitive information or local configurations
