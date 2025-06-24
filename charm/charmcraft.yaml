@@ -26,7 +26,7 @@ config:
       type: string
       default: localhost
       description: The host the service listens on.
-    APP_ENV:
+    ENV:
       type: string
       default: production
       description: "The environment the service is running in. enum: development, production"

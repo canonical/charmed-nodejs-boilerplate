@@ -2,7 +2,8 @@
 
 version=$(grep '^version:' "rockcraft.yaml" | cut -d'"' -f2)
 
-
+modelname=baremodel
+appname=bareapp
 rockname=$(grep '^name:' "rockcraft.yaml" | cut -d':' -f2 | xargs)
 charmname=$(grep '^name:' "charm/charmcraft.yaml" | cut -d':' -f2 | xargs)
 
@@ -11,6 +12,8 @@ clear
 echo "============================================================"
 echo "== Packing Rock ============================================"
 echo "============================================================"
+echo "Model Name: ### $modelname ###"
+echo "App Name: ### $appname ###"
 echo "Charm Name: ### $charmname ###"
 echo "Rock Name: ### $rockname ###"
 echo "Rock Version: ### $version ###"
@@ -44,7 +47,22 @@ cd ..
 echo
 echo
 echo "============================================================"
-echo "== Refreshing Application =================================="
+echo "== Deploying / Refreshing Application ======================"
 echo "============================================================"
-# juju deploy ./charm/${charmname}_amd64.charm exapp --resource app-image=localhost:32000/${rockname}:${version}
-juju refresh exapp --path ./charm/${charmname}_amd64.charm --resource app-image=localhost:32000/${rockname}:${version}
+
+if ! juju models | grep -q "${modelname}"; then
+    echo "Model '${modelname}' does not exist. Creating..."
+    juju add-model "${modelname}"
+    echo "Model '${modelname}' created."
+else
+    echo "Model '${modelname}' already exists."
+fi
+
+juju switch $modelname
+if juju status --color --relations | grep -q "^$appname\\s"; then
+  echo "Application '$appname' exists. Running juju refresh..."
+  juju refresh ${appname} --path ./charm/${charmname}_amd64.charm --resource app-image=localhost:32000/${rockname}:${version}
+else
+  echo "Application '$appname' does not exist. Running juju deploy..."
+  juju deploy ./charm/${charmname}_amd64.charm ${appname} --resource app-image=localhost:32000/${rockname}:${version}
+fi
