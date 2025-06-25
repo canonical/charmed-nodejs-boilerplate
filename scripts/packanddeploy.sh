@@ -1,6 +1,10 @@
 #!/bin/bash
 
-version=$(grep '^version:' "rockcraft.yaml" | cut -d'"' -f2)
+# version=$(grep '^version:' "rockcraft.yaml" | cut -d'"' -f2)
+version=$(cat version)
+
+sed -i "s/^version: \".*\"/version: \"$version\"/" rockcraft.yaml
+sed -i "s/self.unit.set_workload_version(\".*\")/self.unit.set_workload_version(\"$version\")/" charm/src/charm.py
 
 modelname=baremodel
 appname=bareapp
@@ -12,11 +16,11 @@ clear
 echo "============================================================"
 echo "== Packing Rock ============================================"
 echo "============================================================"
-echo "Model Name: ### $modelname ###"
-echo "App Name: ### $appname ###"
-echo "Charm Name: ### $charmname ###"
-echo "Rock Name: ### $rockname ###"
-echo "Rock Version: ### $version ###"
+echo "Model Name:   ### $modelname ###"
+echo "App Name:     ### $appname ###"
+echo "App Version:  ### $version ###"
+echo "Charm Name:   ### $charmname ###"
+echo "Rock Name:    ### $rockname ###"
 
 rockcraft clean
 rockcraft pack
