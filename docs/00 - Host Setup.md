@@ -53,7 +53,8 @@ sudo microk8s enable ingress
 ```
 
 ## Juju Install
-Juju is required to deploy the application
+Juju is required to deploy the application.  
+Hint: Use the same version of Juju as your target environment to be on the safe side.
 ```
 sudo snap install juju --channel 3.6/stable
 mkdir -p ~/.local/share
