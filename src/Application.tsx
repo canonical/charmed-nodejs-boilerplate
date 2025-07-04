@@ -1,7 +1,6 @@
 import { Button, TooltipArea } from "@canonical/react-ds-core";
 import { Suspense, useState, lazy } from "react";
 import canonicalLogo from "./assets/canonical.svg";
-import "./Application.css";
 
 const LazyButton = lazy(
   () =>
