@@ -4,8 +4,14 @@
 # ===
 FROM oven/bun:latest AS dependencies
 WORKDIR /srv
+ARG BUILD_ENV=production
 COPY package.json bun.lock ./
-RUN --mount=type=cache,target=/usr/local/share/.cache/bun bun install
+RUN --mount=type=cache,target=/usr/local/share/.cache/bun \
+  if [ "$BUILD_ENV" = "development" ]; then \
+    bun install; \
+  else \
+    bun install --production; \
+  fi
 
 # Build stage: Run "bun build"
 # ===
@@ -19,13 +25,17 @@ FROM node:22
 
 ARG HOST=0.0.0.0
 ARG PORT=80
+ARG BUILD_ENV=production
 
 ENV PORT=$PORT
 ENV HOST=$HOST
 
 WORKDIR /srv
 
-RUN npm install -g nodemon
+# Install nodemon and bun globally only in development environment
+RUN if [ "$BUILD_ENV" = "development" ]; then \
+    npm install -g nodemon bun; \
+  fi
 
 # Import code, build assets
 COPY --from=build /srv/node_modules ./node_modules
