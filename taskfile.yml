@@ -98,7 +98,6 @@ tasks:
       - |
         docker run -d --name $IMAGE_NAME \
           -v $PWD:/srv \
-          -v /srv/dist \
           -v /srv/node_modules \
           -w /srv \
           -p $FRONTEND_PORT:$FRONTEND_PORT \
