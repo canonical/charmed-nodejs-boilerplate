@@ -133,8 +133,7 @@ tasks:
     desc: "Start the backend development server"
     deps: [start]
     cmds:
-      - docker exec -w /srv $IMAGE_NAME bash -c 'bun run build'
-      - docker exec -w /srv $IMAGE_NAME bash -c 'nodemon --watch dist --ext js --exec "node dist/server/server.js"' | sed "s/^/[backend-server] /"
+      - docker exec -w /srv $IMAGE_NAME bash -c 'nodemon --exec "node dist/server/server.js"' | sed "s/^/[backend-server] /"
 
   serve:
     desc: "Start both frontend and backend servers with hot reloading"
