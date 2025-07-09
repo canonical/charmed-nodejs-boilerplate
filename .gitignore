@@ -7,8 +7,8 @@ lerna-debug.log*
 .pnp.js
 
 # Bun (as package manager)
-bun.lockb # Bun's binary lockfile - generally ignore this due to merge conflicts
-.bun/     # Bun's internal project cache directory
+bun.lockb      # Bun's binary lockfile - generally ignore this due to merge conflicts
+.bun/          # Bun's internal project cache directory
 bun-debug.log* # Bun's debug logs
 
 # Build outputs (for both frontend and backend)
@@ -44,11 +44,11 @@ coverage/
 .nyc_output/
 
 # IDE and Editor specific files
-.vscode/        # VS Code settings (if user-specific, not project-wide)
-.idea/          # IntelliJ/WebStorm specific files
-*.iml           # IntelliJ module files
-.DS_Store       # macOS specific
-Thumbs.db       # Windows specific
+.vscode/  # VS Code settings (if user-specific, not project-wide)
+.idea/    # IntelliJ/WebStorm specific files
+*.iml     # IntelliJ module files
+.DS_Store # macOS specific
+Thumbs.db # Windows specific
 *.suo
 *.user
 *.bak
@@ -83,3 +83,4 @@ __pycache__/
 *.py[cod]
 .idea
 .vscode/
+.task/
