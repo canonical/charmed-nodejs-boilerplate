@@ -7,6 +7,7 @@ description: |
 
 platforms:
   amd64:
+  arm64:
 
 services:
   go:
