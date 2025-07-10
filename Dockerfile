@@ -5,7 +5,7 @@
 FROM oven/bun:latest AS dependencies
 WORKDIR /srv
 ARG BUILD_ENV=production
-COPY package.json bun.lock ./
+COPY app/package.json app/bun.lock ./
 RUN --mount=type=cache,target=/usr/local/share/.cache/bun \
   if [ "$BUILD_ENV" = "development" ]; then \
     bun install; \
@@ -16,8 +16,8 @@ RUN --mount=type=cache,target=/usr/local/share/.cache/bun \
 # Build stage: Run "bun build"
 # ===
 FROM dependencies AS build
-COPY index.html tsconfig.json vite.config.ts ./
-COPY src ./src
+COPY app/index.html app/tsconfig.json app/vite.config.ts ./
+COPY app/src ./src
 RUN bun run build
 
 # Build the demo image

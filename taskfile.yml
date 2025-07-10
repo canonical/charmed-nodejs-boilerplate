@@ -59,8 +59,9 @@ tasks:
     deps: [install-docker]
     sources:
       - Dockerfile
-      - package.json
-      - bun.lock
+      - app/package.json
+      - app/bun.lock
+      - app/
     status:
       - test `docker images -q $IMAGE_NAME`
     cmds:
@@ -72,13 +73,13 @@ tasks:
     status:
       - test -z `docker images -q $IMAGE_NAME`
     cmds:
-    - |
-      CONTAINERS=$(docker ps -a -q --filter ancestor=$IMAGE_NAME)
-      if [ -n "$CONTAINERS" ]; then
-        echo "Stopping and removing containers using $IMAGE_NAME..."
-        docker rm -f $CONTAINERS
-      fi
-      docker rmi "$IMAGE_NAME"
+      - |
+        CONTAINERS=$(docker ps -a -q --filter ancestor=$IMAGE_NAME)
+        if [ -n "$CONTAINERS" ]; then
+          echo "Stopping and removing containers using $IMAGE_NAME..."
+          docker rm -f $CONTAINERS
+        fi
+        docker rmi "$IMAGE_NAME"
 
   rebuild:
     desc: "Remove and rebuild the Docker image"
@@ -99,41 +100,41 @@ tasks:
         docker run -d --name $IMAGE_NAME \
           -v $PWD:/srv \
           -v /srv/node_modules \
-          -w /srv \
+          -w /srv/app \
           -p $FRONTEND_PORT:$FRONTEND_PORT \
           -p $BACKEND_PORT:$BACKEND_PORT \
           -e PORT=$BACKEND_PORT \
-          $IMAGE_NAME tail -f /dev/null
+          $IMAGE_NAME sh -c "bun run build && node dist/server/server.js"
 
   stop:
     desc: "Stop and remove the Docker container"
     cmds:
-    - docker stop $IMAGE_NAME 2>/dev/null || true
-    - docker rm $IMAGE_NAME 2>/dev/null || true
+      - docker stop $IMAGE_NAME 2>/dev/null || true
+      - docker rm $IMAGE_NAME 2>/dev/null || true
 
   watch:frontend:
     desc: "Watch and build frontend code changes"
     deps: [start]
     cmds:
-      - docker exec -w /srv $IMAGE_NAME bash -c 'SHELL=/bin/bash bun run watch:client' | sed "s/^/[client-build] /"
+      - docker exec -w /srv/app $IMAGE_NAME bash -c 'SHELL=/bin/bash bun run watch:client' | sed "s/^/[client-build] /"
 
   watch:backend:
     desc: "Watch and build backend code changes"
     deps: [start]
     cmds:
-      - docker exec -w /srv $IMAGE_NAME bash -c 'SHELL=/bin/bash bun run watch:server' | sed "s/^/[server-build] /"
+      - docker exec -w /srv/app $IMAGE_NAME bash -c 'SHELL=/bin/bash bun run watch:server' | sed "s/^/[server-build] /"
 
   serve:frontend:
     desc: "Start the frontend development server"
     deps: [start]
     cmds:
-      - docker exec -w /srv $IMAGE_NAME bash -c 'bun run dev' | sed "s/^/[frontend-server] /"
+      - docker exec -w /srv/app $IMAGE_NAME bash -c 'bun run dev' | sed "s/^/[frontend-server] /"
 
   serve:backend:
     desc: "Start the backend development server"
     deps: [start]
     cmds:
-      - docker exec -w /srv $IMAGE_NAME bash -c 'nodemon --exec "node dist/server/server.js"' | sed "s/^/[backend-server] /"
+      - docker exec -w /srv/app $IMAGE_NAME bash -c 'nodemon --exec "node dist/server/server.js"' | sed "s/^/[backend-server] /"
 
   serve:
     desc: "Start both frontend and backend servers with hot reloading"

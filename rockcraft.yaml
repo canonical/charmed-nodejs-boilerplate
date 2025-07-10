@@ -27,17 +27,6 @@ extensions:
 parts:
   expressjs-framework/install-app:
     plugin: npm
-    source: .
+    source: ./app 
     npm-include-node: true
     npm-node-version: "22"
-    override-build: |
-      echo "Running npm install..."
-      npm install
-      echo "Copying app files..."
-      mkdir -p ${CRAFT_PART_INSTALL}/app
-      cp -ar * ${CRAFT_PART_INSTALL}/app
-    overlay-packages:
-      - ca-certificates
-      - coreutils
-      - bash
-      - htop
