@@ -10,7 +10,7 @@ modelname=baremodel
 appname=bareapp
 rockname=$(grep '^name:' "rockcraft.yaml" | cut -d':' -f2 | xargs)
 charmname=$(grep '^name:' "charm/charmcraft.yaml" | cut -d':' -f2 | xargs)
-
+archname=$(dpkg --print-architecture)
 
 clear
 echo "============================================================"
@@ -23,7 +23,7 @@ echo "Charm Name:   ### $charmname ###"
 echo "Rock Name:    ### $rockname ###"
 
 rockcraft clean
-rockcraft pack
+ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True rockcraft pack
 
 
 echo
@@ -31,7 +31,7 @@ echo
 echo "============================================================"
 echo "== Uploading Rock to Registry =============================="
 echo "============================================================"
-rockcraft.skopeo copy --insecure-policy --dest-tls-verify=false oci-archive:${rockname}_${version}_amd64.rock docker://localhost:32000/${rockname}:${version}
+rockcraft.skopeo copy --insecure-policy --dest-tls-verify=false oci-archive:${rockname}_${version}_${archname}.rock docker://localhost:32000/${rockname}:${version}
 
 
 echo
@@ -65,8 +65,8 @@ fi
 juju switch $modelname
 if juju status --color --relations | grep -q "^$appname\\s"; then
   echo "Application '$appname' exists. Running juju refresh..."
-  juju refresh ${appname} --path ./charm/${charmname}_amd64.charm --resource app-image=localhost:32000/${rockname}:${version}
+  juju refresh ${appname} --path ./charm/${charmname}_${archname}.charm --resource app-image=localhost:32000/${rockname}:${version}
 else
   echo "Application '$appname' does not exist. Running juju deploy..."
-  juju deploy ./charm/${charmname}_amd64.charm ${appname} --resource app-image=localhost:32000/${rockname}:${version}
+  juju deploy ./charm/${charmname}_${archname}.charm ${appname} --resource app-image=localhost:32000/${rockname}:${version}
 fi

@@ -24,9 +24,3 @@ platforms:
 extensions:
     - expressjs-framework
 
-parts:
-  expressjs-framework/install-app:
-    plugin: npm
-    source: ./app 
-    npm-include-node: true
-    npm-node-version: "22"
