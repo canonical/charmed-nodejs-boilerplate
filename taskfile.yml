@@ -61,7 +61,6 @@ tasks:
       - Dockerfile
       - app/package.json
       - app/bun.lock
-      - app/
     status:
       - test `docker images -q $IMAGE_NAME`
     cmds:
@@ -104,7 +103,7 @@ tasks:
           -p $FRONTEND_PORT:$FRONTEND_PORT \
           -p $BACKEND_PORT:$BACKEND_PORT \
           -e PORT=$BACKEND_PORT \
-          $IMAGE_NAME sh -c "bun run build && node dist/server/server.js"
+          $IMAGE_NAME tail -f /dev/null
 
   stop:
     desc: "Stop and remove the Docker container"

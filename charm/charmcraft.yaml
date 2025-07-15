@@ -39,9 +39,6 @@ config:
       type: string
       default: ""
       description: Base URL of the application
-    MYENVVARIABLE:
-      type: string
-      description: A custom environment variable for the app
 
 # Uncomment the integrations used by your application
 # Integrations set to "optional: false" will block the charm
