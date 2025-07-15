@@ -8,7 +8,7 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const htmlString = readFileSync(
-  path.resolve(__dirname, "../../dist/client/index.html"),
+  path.resolve(__dirname, "../client/index.html"),
   "utf8"
 );
 

@@ -1,7 +1,7 @@
 {
   "extends": "@canonical/typescript-config-react",
   "compilerOptions": {
-    "baseUrl": "src",
+    "baseUrl": "app/src",
     "types": [
       "node",
       "react",
@@ -12,11 +12,11 @@
     "noEmit": true
   },
   "include": [
-    "src/**/*.ts",
-    "src/**/*.tsx",
+    "app/src/**/*.ts",
+    "app/src/**/*.tsx",
     ".storybook/*.ts",
     ".storybook/*.tsx",
-    "vite.config.ts",
+    "app/vite.config.ts",
     "vitest.setup.ts",
     "vitest.config.ts"
   ]

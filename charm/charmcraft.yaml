@@ -1,41 +1,44 @@
-# created by charmcraft init --profile go-framework --name expressapp
-# later manually modified to fit nodejs needs
-name: barecharm
+# This file configures Charmcraft.
+# See https://canonical-charmcraft.readthedocs-hosted.com/stable/reference/files/charmcraft-yaml-file/ for guidance.
+
+name: charmed-nodejs-boilerplate
+
 type: charm
+
 base: ubuntu@24.04
+
+# the platforms this charm should be built on and run on.
+# you can check your architecture with `dpkg --print-architecture`
 platforms:
   amd64:
-    build-on: [amd64]
-    build-for: [amd64]
+  arm64:
+  # ppc64el:
+  # s390x:
 
-summary: NodeJS Barebones Application
+# (Required)
+summary: An ExpressJS 12-Factor boilerplate application 
+
+# (Required)
 description: |
-  NodeJS Barebones Application
+  This is the 12-Factor App charm of the Web team's ExpressJS boilerplate application.
 
 extensions:
-  - go-framework
-
-# requires:
-#   nginx-route:
-#     interface: nginx-route
-#     limit: 1
+  - expressjs-framework
 
 config:
   options:
     HOST:
       type: string
-      default: localhost
-      description: The host the service listens on.
+      default: "0.0.0.0"
+      description: The host the application will listen on.
     ENV:
       type: string
       default: production
-      description: "The environment the service is running in. enum: development, production"
+      description: The environment the app is running in. One of development, production
     CUSTOM_BASE_URL:
       type: string
-      default: "http://localhost:8080"
-    MYENVVARIABLE:
-      type: string
-      # required: True
+      default: ""
+      description: Base URL of the application
 
 # Uncomment the integrations used by your application
 # Integrations set to "optional: false" will block the charm
@@ -67,5 +70,17 @@ config:
 #     limit: 1
 #   rabbitmq:
 #     interface: rabbitmq
+#     optional: false
+#     limit: 1
+#   tracing:
+#     interface: tracing
+#     optional: true
+#     limit: 1
+#   smtp:
+#     interface: smtp
+#     optional: false
+#     limit: 1
+#   openfga:
+#     interface: openfga
 #     optional: false
 #     limit: 1
