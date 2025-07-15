@@ -63,6 +63,10 @@ else
 fi
 
 juju switch $modelname
+
+echo "Setting model constraint arch=$archname"
+juju set-model-constraints -m "$modelname" arch="$archname"
+
 if juju status --color --relations | grep -q "^$appname\\s"; then
   echo "Application '$appname' exists. Running juju refresh..."
   juju refresh ${appname} --path ./charm/${charmname}_${archname}.charm --resource app-image=localhost:32000/${rockname}:${version}
