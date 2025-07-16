@@ -25,6 +25,11 @@ class CharmedNodejsBoilerplateCharm(paas_charm.expressjs.Charm):
         """
         super().__init__(*args)
 
+        self.framework.observe(self.on.start, self._on_start)
+
+    def _on_start(self, event: ops.StartEvent):
+        # The workload exposes the version via HTTP at /version
+        self.unit.set_workload_version("0.0.3")
 
 if __name__ == "__main__":
     ops.main(CharmedNodejsBoilerplateCharm)
