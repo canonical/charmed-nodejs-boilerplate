@@ -4,12 +4,12 @@ name: charmed-nodejs-boilerplate
 base: bare # as an alternative, a ubuntu base can be used
 build-base: ubuntu@24.04 # build-base is required when the base is bare
 version: "0.0.4"
-summary: A summary of your ExpresssJS application # 79 char long summary
+summary: Nodejs Boilerplate application
+
 description: |
-    This is charmed-nodejs-boilerplate's description. You have a paragraph or two to tell the
-    most important story about it. Keep it under 100 words though,
-    we live in tweetspace and your description wants to look good in the
-    container registries out there.
+    A modern Node.js boilerplate application featuring React frontend with Vite,
+    Express.js backend with server-side rendering (SSR), and Juju charm integration.
+
 # the platforms this rock should be built on and run on.
 # you can check your architecture with `dpkg --print-architecture`
 platforms:
