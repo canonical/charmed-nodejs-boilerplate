@@ -1,6 +1,7 @@
 import { Button, TooltipArea } from "@canonical/react-ds-core";
 import { Suspense, useState, lazy } from "react";
 import canonicalLogo from "./assets/canonical.svg";
+import "./index.css";
 
 const LazyButton = lazy(
   () =>
@@ -14,13 +15,14 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
+    <div className="app">
       <div>
         <a
           href="https://canonical.com"
           target="_blank"
           referrerPolicy="no-referrer"
           rel="noreferrer"
+          style={{ display: "block", width: "100px"}}
         >
           <img src={canonicalLogo} className="logo" alt="Canonical logo" />
         </a>
@@ -42,7 +44,7 @@ function App() {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
-    </>
+    </div>
   );
 }
 

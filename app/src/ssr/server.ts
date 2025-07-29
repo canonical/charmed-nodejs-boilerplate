@@ -9,6 +9,11 @@ const app = express();
 
 app.use(/^\/(assets|public)/, express.static("dist/client/assets"));
 
+// Health check endpoint
+app.get("/_status/check", (req, res) => {
+  res.status(200).json({ status: "OK" });
+});
+
 app.use(serveStream(render));
 
 app.listen(PORT, () => {
