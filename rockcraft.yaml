@@ -37,7 +37,8 @@ parts:
         craftctl default
 
         # We need to copy the built files to the install directory
-        cp -r dist/ ${CRAFT_PART_INSTALL}/lib/node_modules/react-express-poc/dist
+        mkdir -p ${CRAFT_PART_INSTALL}/lib/node_modules/react-express-poc/dist
+        cp -r dist/. ${CRAFT_PART_INSTALL}/lib/node_modules/react-express-poc/dist
         npm config set script-shell=bash --location project
         cp ${CRAFT_PART_BUILD}/.npmrc ${CRAFT_PART_INSTALL}/lib/node_modules/react-express-poc/.npmrc
         chown -R 584792:584792 ${CRAFT_PART_INSTALL}/lib/node_modules/react-express-poc
