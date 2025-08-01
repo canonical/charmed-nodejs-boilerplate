@@ -18,8 +18,10 @@ echo "App Version:  ### ${APP_VERSION} ###"
 echo "Charm Name:   ### ${CHARM_NAME} ###"
 echo "Rock Name:    ### ${ROCK_NAME} ###"
 
+export ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True 
+
 rockcraft clean
-ROCKCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True rockcraft pack
+rockcraft pack
 
 
 echo
@@ -35,6 +37,9 @@ echo
 echo "============================================================"
 echo "== Packing Charm ==========================================="
 echo "============================================================"
+
+export CHARMCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True 
+
 cd charm
 charmcraft clean
 charmcraft fetch-lib
