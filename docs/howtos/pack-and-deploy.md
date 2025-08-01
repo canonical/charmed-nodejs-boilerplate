@@ -78,7 +78,7 @@ cd ..
 
 Finally, the packed Charm is deployed to your chosen Juju model. If the application already exists in the model, it will be refreshed to the new version; otherwise, it will be deployed.
 
-'''bash
+```bash
 APP_MODEL_NAME="nodejs" # The target Juju model name
 APP_NAME="nodejs-app" # The name of your application within Juju
 CHARM_NAME=$(grep '^name:' "charm/charmcraft.yaml" | cut -d':' -f2 | xargs)
@@ -106,5 +106,5 @@ else
   echo "Application '${APP_NAME}' does not exist. Running juju deploy..."
   juju deploy charm/${CHARM_NAME}_${ARCH_NAME}.charm ${APP_NAME} --resource app-image=localhost:32000/${ROCK_NAME}:${APP_VERSION}
 fi
-'''
+```
 By following these steps, your Node.js application will be packaged into a Rock, transformed into a Charm, and deployed or updated within your Juju environment.
