@@ -41,8 +41,7 @@ echo
 echo "============================================================"
 echo "== Packing Charm ==========================================="
 echo "============================================================"
-
-export CHARMCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=true
+export CHARMCRAFT_ENABLE_EXPERIMENTAL_EXTENSIONS=True
 
 cd charm
 charmcraft clean

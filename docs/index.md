@@ -10,6 +10,7 @@ These guides provide practical, step-by-step instructions to help you achieve sp
 2.  [How to integrate with COS Lite](./howtos/integrate-cos-lite.md)
 3.  [Development Setup](./howtos/development-setup.md)
 4.  [Build the Application](./howtos/build-app.md)
+5.  [Pack and Deploy the Charm](./howtos/pack-and-deploy.md)
 
 ## Explanations
 
