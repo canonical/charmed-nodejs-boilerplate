@@ -12,3 +12,9 @@ The project implements Server-Side Rendering (SSR) through the [React SSR](https
 * **Middleware-based:** The server's server script is the entry point. Built with `bun run build:server:middleware`, served with `bun run serve:middleware`.
 
 The current default behavior is to use the middleware-based approach. So, `bun run build:server` and `bun run serve` will use the middleware scripts. In the future, it is intended that the CLI-based approach will be the default, and the existing `server.ts` file will be moved to the SSR package as an example.
+
+## Next Steps
+
+With a clear understanding of the project's architecture, you can now proceed to:
+
+* [Set up your Development Environment](../howtos/development-setup.md) to begin working with the codebase.

@@ -78,3 +78,9 @@ After COS Lite is deployed, you can deploy your charmed Node.js application and 
     *Replace `nodejs-app`, `<rock-name>`, and `<rock-version>` with your actual application details.*
 
 By following these steps, your Node.js application will be integrated with a locally deployed COS Lite stack, allowing you to monitor its performance and collect logs.
+
+## Next Steps
+
+With COS Lite integration complete, you may also want to:
+
+* [Integrate with NGINX Ingress](./integrate-nginx-ingress.md) to expose your application's external access.

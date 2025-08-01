@@ -55,3 +55,9 @@ Your server will start on [http://localhost:8000](http://localhost:8000).
 You may run into an issue where `serve-express` is not linked in `node_modules/.bin` after running `bun i`. This will result in an error when running `bun run serve:cli`.
 
 To fix this, run `bun i` again. For more information, see [this documentation](https://github.com/jmuzina/bun-repro/tree/7c9f9efae2843bc904eabc10825e36502251d13f/bun-wont-link-modules/express-example).
+
+## Next Steps
+
+With your development environment configured, you're ready to:
+
+* [Build the Application](./build-app.md) for testing or deployment.

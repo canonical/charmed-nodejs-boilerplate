@@ -93,3 +93,10 @@ juju switch controller
 juju status --color --relations
 ```
 Don't use this model for anything if you don't know what you are doing.
+
+## Next Steps
+
+After successfully setting up your host environment, you can now proceed to:
+
+* [Set up your Development Environment](./development-setup.md) to start coding.
+* [Pack and Deploy the Charm](./pack-and-deploy.md) to get your application running in Juju.

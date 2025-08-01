@@ -108,3 +108,10 @@ else
 fi
 ```
 By following these steps, your Node.js application will be packaged into a Rock, transformed into a Charm, and deployed or updated within your Juju environment.
+
+## Next Steps
+
+After deploying your charm, you may want to integrate it with other services:
+
+* [Integrate with COS Lite](./integrate-cos-lite.md) for observability (metrics and logging).
+* [Integrate with NGINX Ingress](./integrate-nginx-ingress.md) to expose your application via an ingress controller.

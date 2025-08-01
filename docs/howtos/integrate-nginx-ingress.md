@@ -49,3 +49,9 @@ curl http://nodejs-app --resolve nodejs-app:80:127.0.0.1
 This command attempts to access your application via the configured hostname `nodejs-app` on `localhost:80`.
 
 By following these steps, your Node.js application will be accessible via NGINX Ingress.
+
+## Next Steps
+
+You have successfully deployed and exposed your charmed Node.js application. You can now continue exploring other aspects of the boilerplate or refer back to the main documentation for more guides and explanations.
+
+* [Return to Documentation Home](../../docs/index.md)

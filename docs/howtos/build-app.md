@@ -47,3 +47,9 @@ The server-side build process can be configured for different Server-Side Render
     This command executes: `vite build --ssr src/ssr/renderer.tsx --outDir dist/server`.
 
 After running the build commands, your compiled application assets will be available in the `dist/` directory.
+
+## Next Steps
+
+Once your application is built, the next logical step is to:
+
+* [Pack and Deploy the Charm](./pack-and-deploy.md) into your Juju environment.
