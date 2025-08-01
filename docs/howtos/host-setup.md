@@ -83,7 +83,7 @@ _Hint: Use the same version of Juju as your target environment to be on the safe
 ```sh
 sudo snap install juju --channel 3.6/stable
 mkdir -p ~/.local/share
-juju bootstrap microk8s dev-controller
+juju bootstrap microk8s dev
 ```
 It could take a few minutes to download the images.
 
