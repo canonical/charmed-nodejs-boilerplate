@@ -1,6 +1,6 @@
 # Pack and Deploy the Charm
 
-This guide details the steps to package your Node.js application into a Rock, build its Charm, and then deploy or refresh it in a local Juju environment. These steps are encapsulated in [scripts/packanddeploy.sh](../../scripts/packanddeploy.sh).
+This guide details the steps to package your Node.js application into a Rock, build its Charm, and then deploy or refresh it in a local Juju environment. These steps are encapsulated in [scripts/pack-and-deploy.sh](../../scripts/pack-and-deploy.sh).
 
 ## Overview
 
@@ -43,12 +43,12 @@ The packed Rock (OCI image) needs to be available to your Kubernetes environment
 
 ```bash
 # Extract rock name and architecture
-rockname=$(grep '^name:' "rockcraft.yaml" | cut -d':' -f2 | xargs)
-version=$(cat version)
-archname=$(dpkg --print-architecture)
+ROCK_NAME=$(grep '^name:' "rockcraft.yaml" | cut -d':' -f2 | xargs)
+APP_VERSION=$(cat version)
+ARCH_NAME=$(dpkg --print-architecture)
 
 # Copy the Rock to the local MicroK8s registry
-rockcraft.skopeo copy --insecure-policy --dest-tls-verify=false oci-archive:${rockname}_${version}_${archname}.rock docker://localhost:32000/${rockname}:${version}
+rockcraft.skopeo copy --insecure-policy --dest-tls-verify=false oci-archive:${ROCK_NAME}_${APP_VERSION}_${ARCH_NAME}.rock docker://localhost:32000/${ROCK_NAME}:${APP_VERSION}
 ```
 
 ### 3. Pack the Charm
@@ -78,33 +78,33 @@ cd ..
 
 Finally, the packed Charm is deployed to your chosen Juju model. If the application already exists in the model, it will be refreshed to the new version; otherwise, it will be deployed.
 
-```bash
-modelname=nodejs # The target Juju model name
-appname=nodejs-app # The name of your application within Juju
-charmname=$(grep '^name:' "charm/charmcraft.yaml" | cut -d':' -f2 | xargs)
-rockname=$(grep '^name:' "rockcraft.yaml" | cut -d':' -f2 | xargs)
-version=$(cat version)
-archname=$(dpkg --print-architecture)
+'''bash
+APP_MODEL_NAME="nodejs" # The target Juju model name
+APP_NAME="nodejs-app" # The name of your application within Juju
+CHARM_NAME=$(grep '^name:' "charm/charmcraft.yaml" | cut -d':' -f2 | xargs)
+ROCK_NAME=$(grep '^name:' "rockcraft.yaml" | cut -d':' -f2 | xargs)
+APP_VERSION=$(cat version)
+ARCH_NAME=$(dpkg --print-architecture)
 
 # Create the Juju model if it doesn't exist, then switch to it
-if ! juju models | grep -q "${modelname}"; then
-    juju add-model "${modelname}"
-    echo "Model '${modelname}' created."
+if ! juju models | grep -q "${MODEL_NAME}"; then
+    juju add-model "${MODEL_NAME}"
+    echo "Model '${MODEL_NAME}' created."
 else
-    echo "Model '${modelname}' already exists."
+    echo "Model '${MODEL_NAME}' already exists."
 fi
-juju switch $modelname
+juju switch ${MODEL_NAME}
 
 # Set model constraints based on architecture
-juju set-model-constraints -m "$modelname" arch="$archname"
+juju set-model-constraints -m "${MODEL_NAME}" arch="${ARCH_NAME}"
 
 # Deploy or refresh the application
-if juju status --color --relations | grep -q "^$appname\s"; then
-  echo "Application '$appname' exists. Running juju refresh..."
-  juju refresh ${appname} --path ./charm/${charmname}_${archname}.charm --resource app-image=localhost:32000/${rockname}:${version}
+if juju status --color --relations | grep -q "^${APP_NAME}\s"; then
+  echo "Application '${APP_NAME}' exists. Running juju refresh..."
+  juju refresh ${APP_NAME} --path charm/${CHARM_NAME}_${ARCH_NAME}.charm --resource app-image=localhost:32000/${ROCK_NAME}:${APP_VERSION}
 else
-  echo "Application '$appname' does not exist. Running juju deploy..."
-  juju deploy ./charm/${charmname}_${archname}.charm ${appname} --resource app-image=localhost:32000/${rockname}:${version}
+  echo "Application '${APP_NAME}' does not exist. Running juju deploy..."
+  juju deploy charm/${CHARM_NAME}_${ARCH_NAME}.charm ${APP_NAME} --resource app-image=localhost:32000/${ROCK_NAME}:${APP_VERSION}
 fi
-```
+'''
 By following these steps, your Node.js application will be packaged into a Rock, transformed into a Charm, and deployed or updated within your Juju environment.

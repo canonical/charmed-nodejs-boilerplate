@@ -10,7 +10,7 @@ COS Lite provides essential observability tools (like Prometheus for metrics and
 
 ### 1. Deploy COS Lite Environment Locally
 
-First, ensure your MicroK8s environment is ready and then deploy the COS Lite bundle. This process is automated by the [scripts/coslite.sh](../../scripts/coslite.sh) script.
+First, ensure your MicroK8s environment is ready and then deploy the COS Lite bundle. This process is automated by the [scripts/deploy-cos-lite.sh](../../scripts/deploy-cos-lite.sh) script.
 
 **Prerequisites from `host-setup.md` are assumed to be met.**
 
@@ -69,10 +69,9 @@ After COS Lite is deployed, you can deploy your charmed Node.js application and 
     ```
 4.  **Establish relations with COS Lite:** These commands connect your application's observability endpoints to the respective COS Lite services.
     ```bash
-    appname=nodejs-app
-    juju relate ${appname} admin/cos.grafana-dashboards
-    juju relate ${appname}:metrics-endpoint grafana-agent-k8s
-    juju relate ${appname}:logging grafana-agent-k8s
+    juju relate nodejs-app admin/cos.grafana-dashboards
+    juju relate nodejs-app:metrics-endpoint grafana-agent-k8s
+    juju relate nodejs-app:logging grafana-agent-k8s
     juju relate grafana-agent-k8s cos.loki-logging
     juju relate grafana-agent-k8s cos.prometheus-receive-remote-write
     ```
