@@ -6,8 +6,8 @@ version=$(cat version)
 sed -i "s/^version: \".*\"/version: \"$version\"/" rockcraft.yaml
 sed -i "s/self.unit.set_workload_version(\".*\")/self.unit.set_workload_version(\"$version\")/" charm/src/charm.py
 
-modelname=express
-appname=express-app
+modelname=nodejs
+appname=nodejs-app
 rockname=$(grep '^name:' "rockcraft.yaml" | cut -d':' -f2 | xargs)
 charmname=$(grep '^name:' "charm/charmcraft.yaml" | cut -d':' -f2 | xargs)
 archname=$(dpkg --print-architecture)

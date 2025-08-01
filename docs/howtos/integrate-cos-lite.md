@@ -55,13 +55,13 @@ After COS Lite is deployed, you can deploy your charmed Node.js application and 
 
 1.  **Switch to your application's Juju model (if different from `cos`):**
     ```bash
-    juju switch express
+    juju switch nodejs
     ```
 2.  **Deploy your application charm:** Ensure your application's charm and rock image are built and accessible.
     ```bash
     # Example: Replace <path-to-app-charm> with the actual path
     # and adjust resource name and image path as per your charm's definition.
-    juju deploy express-app ./<path-to-app-charm>.charm --resource app-image=localhost:32000/<rock-name>:<rock-version>
+    juju deploy nodejs-app ./<path-to-app-charm>.charm --resource app-image=localhost:32000/<rock-name>:<rock-version>
     ```
 3.  **Deploy the Grafana Agent Charm:** This agent is crucial for collecting metrics and logs from your application.
     ```bash
@@ -69,13 +69,13 @@ After COS Lite is deployed, you can deploy your charmed Node.js application and 
     ```
 4.  **Establish relations with COS Lite:** These commands connect your application's observability endpoints to the respective COS Lite services.
     ```bash
-    appname=express-app
+    appname=nodejs-app
     juju relate ${appname} admin/cos.grafana-dashboards
     juju relate ${appname}:metrics-endpoint grafana-agent-k8s
     juju relate ${appname}:logging grafana-agent-k8s
     juju relate grafana-agent-k8s cos.loki-logging
     juju relate grafana-agent-k8s cos.prometheus-receive-remote-write
     ```
-    *Replace `express-app`, `<rock-name>`, and `<rock-version>` with your actual application details.*
+    *Replace `nodejs-app`, `<rock-name>`, and `<rock-version>` with your actual application details.*
 
 By following these steps, your Node.js application will be integrated with a locally deployed COS Lite stack, allowing you to monitor its performance and collect logs.

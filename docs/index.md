@@ -6,17 +6,18 @@ Welcome to the Charmed Node.js Boilerplate documentation. This project provides 
 
 These guides provide practical, step-by-step instructions to help you achieve specific goals.
 
-1.  [Host Setup](./howtos/host-setup.md)
-2.  [How to integrate with COS Lite](./howtos/integrate-cos-lite.md)
-3.  [Development Setup](./howtos/development-setup.md)
-4.  [Build the Application](./howtos/build-app.md)
-5.  [Pack and Deploy the Charm](./howtos/pack-and-deploy.md)
+1. [Development Setup](./howtos/development-setup.md)
+2. [Build the Application](./howtos/build-app.md)
+3. [Host Setup](./howtos/host-setup.md)
+4. [Pack and Deploy the Charm](./howtos/pack-and-deploy.md)
+5. [Integrate with NGINX Ingress](./howtos/integrate-nginx-ingress.md)
+6. [Integrate with COS Lite](./howtos/integrate-cos-lite.md)
 
 ## Explanations
 
 These documents explain concepts, architecture, and design decisions to deepen your understanding of the project.
 
-1.  [Architecture Overview](./explanations/architecture.md)
+1. [Architecture Overview](./explanations/architecture.md)
 
 ## Reference
 

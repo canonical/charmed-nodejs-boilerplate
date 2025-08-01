@@ -79,8 +79,8 @@ cd ..
 Finally, the packed Charm is deployed to your chosen Juju model. If the application already exists in the model, it will be refreshed to the new version; otherwise, it will be deployed.
 
 ```bash
-modelname=express # The target Juju model name
-appname=express-app # The name of your application within Juju
+modelname=nodejs # The target Juju model name
+appname=nodejs-app # The name of your application within Juju
 charmname=$(grep '^name:' "charm/charmcraft.yaml" | cut -d':' -f2 | xargs)
 rockname=$(grep '^name:' "rockcraft.yaml" | cut -d':' -f2 | xargs)
 version=$(cat version)

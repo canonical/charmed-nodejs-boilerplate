@@ -3,7 +3,7 @@
 version=$(grep '^version:' "rockcraft.yaml" | cut -d'"' -f2)
 
 modelname=cos
-appname=express-app
+appname=nodejs-app
 rockname=$(grep '^name:' "rockcraft.yaml" | cut -d':' -f2 | xargs)
 charmname=$(grep '^name:' "charm/charmcraft.yaml" | cut -d':' -f2 | xargs)
 IPADDR=$(ip -4 -j route get 2.2.2.2 | jq -r '.[] | .prefsrc')
