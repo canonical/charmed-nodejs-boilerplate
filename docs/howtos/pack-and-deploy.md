@@ -64,10 +64,7 @@ cd charm
 
 # Clean any previous Charm builds, fetch libraries, and pack the Charm
 charmcraft clean
-charmcraft fetch-lib
-charmcraft fetch-lib charms.tempo_coordinator_k8s.v0.tracing
-charmcraft fetch-lib charms.smtp_integrator.v0.smtp
-charmcraft fetch-lib charms.openfga_k8s.v1.openfga
+charmcraft fetch-libs
 charmcraft pack
 
 # Navigate back to the project root
