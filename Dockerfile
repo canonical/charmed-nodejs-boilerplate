@@ -21,7 +21,7 @@ COPY app/src ./src
 RUN bun run build
 
 # Build the demo image
-FROM node:22
+FROM node:26
 
 ARG HOST=0.0.0.0
 ARG PORT=80
